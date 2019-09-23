@@ -1,4 +1,6 @@
 #! /usr/bin/env python
+from __future__ import absolute_import
+from __future__ import print_function
 import wx, sys, os, logging, operator
 import wx.lib.newevent
 log = logging.getLogger( 'squaremap' )
@@ -216,7 +218,10 @@ class SquareMap( wx.Panel ):
         # the same size as the Window.
         if event is None:
             return 0,0
-        width, height = self.GetClientSizeTuple()
+        if hasattr(self, 'GetClientSizeTuple'):
+            width, height = self.GetClientSizeTuple()
+        else:
+            width, height = self.GetClientSize()
         if width <= 0 or height <=0:
             return 0,0
         # Make new off-screen bitmap: this bitmap will always have the
@@ -234,7 +239,6 @@ class SquareMap( wx.Panel ):
     def Draw(self, dc):
         ''' Draw the tree map on the device context. '''
         self.hot_map = []
-        dc.BeginDrawing()
         brush = wx.Brush( self.BackgroundColour  )
         dc.SetBackground( brush )
         dc.Clear()
@@ -245,7 +249,6 @@ class SquareMap( wx.Panel ):
             self._em_size_ = dc.GetFullTextExtent( 'm', font )[0]
             w, h = dc.GetSize()
             self.DrawBox( dc, self.model, 0,0,w,h, hot_map = self.hot_map )
-        dc.EndDrawing()
 
     def FontForLabels(self, dc):
         ''' Return the default GUI font, scaled for printing if necessary. '''

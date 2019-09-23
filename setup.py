@@ -5,10 +5,11 @@ Run:
 	python setup.py install
 to install the package from the source archive.
 """
+from __future__ import absolute_import
 import os
 try:
     from setuptools import setup
-except ImportError, err:
+except ImportError as err:
     from distutils.core import setup
 
 version = [
@@ -54,6 +55,9 @@ in a time-tracking application.""",
 		options = {
 			'sdist':{'force_manifest':1,'formats':['gztar','zip'],},
 		},
+		install_requires = [
+			'six',
+		],
 		zip_safe=False,
 		**extraArguments
 	)
