@@ -22,7 +22,8 @@ if __name__ == "__main__":
 	extraArguments = {
 		'classifiers': [
 			"""License :: OSI Approved :: BSD License""",
-			"""Programming Language :: Python""",
+            """Programming Language :: Python :: 2""",
+            """Programming Language :: Python :: 3""",
 			"""Topic :: Software Development :: Libraries :: Python Modules""",
 			"""Intended Audience :: Developers""",
 		],
@@ -53,10 +54,11 @@ in a time-tracking application.""",
 			'squaremap',
 		],
 		options = {
-			'sdist':{'force_manifest':1,'formats':['gztar','zip'],},
+			'sdist':{'force_manifest':1,'formats':['gztar'],},
 		},
 		install_requires = [
 			'six',
+			'wxPython',
 		],
 		zip_safe=False,
 		**extraArguments
